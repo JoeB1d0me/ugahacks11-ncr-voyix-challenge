@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from datetime import timedelta, datetime
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ DB = 'inventory.db'
 def get_db():
     return sqlite3.connect(DB)
 
-@app.route("/")
+@app.route("/api/inventory")
 def dashboard():
     conn = get_db()
     c = conn.cursor()
@@ -48,7 +48,7 @@ def dashboard():
         
     conn.close()
     
-    return render_template("dashboard.html", inventory=inventory)
+    return jsonify(inventory)
 
 
 
