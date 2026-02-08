@@ -52,19 +52,37 @@ function App() {
     return;
   }
 
-  if (typeof form.stock != "number" ||
-      typeof form.avg_sales != "number" ||
-      typeof form.supplier_days != "number") {
-        alert("Make sure each field is the right datatype");
-        return;
-      }
+
+  //Type Checking Form Fields
+  const stock = Number(form.stock);
+  const avgSales = Number(form.avg_sales);
+  const supplierDays = Number(form.supplier_days);
+
+
+    // Validate numbers
+    if (
+      isNaN(stock) ||
+      isNaN(avgSales) ||
+      isNaN(supplierDays)
+    ) {
+      alert("Please enter valid numbers");
+      return;
+    }
+
+    const payload = {
+    item: form.item,
+    stock,
+    avg_sales: avgSales,
+    supplier_days: supplierDays
+  };
+
 
   await fetch("http://127.0.0.1:5000/api/inventory", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(form)
+    body: JSON.stringify(payload)
   });
 
   fetchInventory();
