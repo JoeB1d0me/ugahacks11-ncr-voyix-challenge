@@ -40,5 +40,5 @@ Project Log Summary
 
 This project was developed over three days at UGAHacks 11. Initial development focused on backend prototyping, followed by frontend integration and analytics features. Final stages focused on UI polish and presentation.
 - **Day 1**: Set up Flask backend, created API endpoints for inventory management.
-- **Day 2**: Developed React frontend, implemented CRUD operations, and integrated Chart.js for data visualization.
-- **Day 3** : Finalized UI and styling. 
+- **Day 2**: Developed React frontend and implemented CRUD operations
+- **Day 3** : Finalized UI and styling. Integrated Chart.js for data visualization. Made a pie chart and area chart for visualization
