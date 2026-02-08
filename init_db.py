@@ -45,11 +45,11 @@ CREATE TABLE orders (
 
 # Sample inventory data
 items = [
-    ("Burger Buns", 120, 25, 3, 100),
-    ("Beef Patties", 300, 40, 4, 150),
-    ("Cheese", 200, 20, 2, 80),
-    ("Lettuce", 90, 15, 2, 60),
-    ("Soda Syrup", 50, 8, 5, 40)
+    ("Wands", 120, 25, 3, 100),
+    ("Robes", 300, 40, 4, 150),
+    ("Tomes", 200, 20, 2, 80),
+    ("Potions", 90, 15, 2, 60),
+    ("Hats", 50, 8, 5, 40)
 ]
 
 c.executemany("""

@@ -11,11 +11,16 @@ function App() {
 
   const [inventory, setInventory] = useState([]);
 
-  useEffect(() => {
 
-    fetch("http://127.0.0.1:5000/api/inventory")
-      .then(res => res.json())
-      .then(data => setInventory(data));
+
+  const fetchInventory = async () => {
+    const res = await fetch("http://127.0.0.1:5000/api/inventory");
+    const data = await res.json();
+    setInventory(data);
+  };
+
+  useEffect(() => {
+    fetchInventory();
 
   }, []);
 
@@ -47,6 +52,13 @@ function App() {
     return;
   }
 
+  if (typeof form.stock != "number" ||
+      typeof form.avg_sales != "number" ||
+      typeof form.supplier_days != "number") {
+        alert("Make sure each field is the right datatype");
+        return;
+      }
+
   await fetch("http://127.0.0.1:5000/api/inventory", {
     method: "POST",
     headers: {
@@ -55,7 +67,7 @@ function App() {
     body: JSON.stringify(form)
   });
 
-  window.location.reload();
+  fetchInventory();
 };
 
 
@@ -69,7 +81,7 @@ function App() {
       method: "DELETE"
     });
 
-    window.location.reload();
+    fetchInventory();
   };
 
 
@@ -92,7 +104,7 @@ function App() {
         return;
       }
 
-      window.location.reload();
+      fetchInventory();
     } catch (err) {
       alert("Failed to place order");
     }
@@ -132,7 +144,7 @@ function App() {
     });
 
     setEditingId(null);
-    window.location.reload();
+    fetchInventory();
   };
 
 
@@ -193,15 +205,15 @@ function App() {
                 <h3> 🪄 Edit Spell </h3>
 
           ) : (
-            <h3> ✨ Add Spell</h3>
+            <h3> ✨ Add Item</h3>
           )}
 
           <div className="form">
 
-    <input name="item" placeholder="Item" onChange={handleChange} />
-    <input name="stock" placeholder="Stock" onChange={handleChange} />
-    <input name="avg_sales" placeholder="Avg Sales" onChange={handleChange} />
-    <input name="supplier_days" placeholder="Days to Delivery" onChange={handleChange} />
+    <input name="item" value={form.item} placeholder="Item" onChange={handleChange} />
+    <input name="stock" value={form.stock} placeholder="Stock" onChange={handleChange} />
+    <input name="avg_sales" value={form.avg_sales} placeholder="Avg Sales" onChange={handleChange} />
+    <input name="supplier_days" value={form.supplier_days} placeholder="Days to Delivery" onChange={handleChange} />
 
 
     <button onClick={addItem}>

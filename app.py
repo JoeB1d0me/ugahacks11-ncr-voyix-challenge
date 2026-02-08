@@ -35,7 +35,6 @@ def get_inventory():
 
         id, item, stock, avg_sales, supplier_days, order_id, quantity_ordered, order_date, expected_arrival = row
 
-        # Safety casting (just in case)
         stock = int(stock)
         avg_sales = float(avg_sales)
         supplier_days = int(supplier_days)
@@ -59,11 +58,10 @@ def get_inventory():
         # Status logic based on reorder timing
         status = "OK"
 
-        # If we need to reorder now or are already late
         if reorder_in <= 0:
             status = "CRITICAL"
 
-        # If we should reorder within 3 days
+   
         elif reorder_in <= 3:
             status = "LOW"
 
@@ -95,7 +93,6 @@ def get_inventory():
 
 # CREATE
 @app.route("/api/inventory", methods=["POST"])
-@app.route("/api/inventory", methods=["POST"])
 def add_item():
     data = request.json
     
@@ -124,7 +121,6 @@ def add_item():
     return jsonify({"message": "Item added"}), 201
 
 # UPDATE
-@app.route("/api/inventory/<int:item_id>", methods=["PUT"])
 @app.route("/api/inventory/<int:item_id>", methods=["PUT"])
 def update_item(item_id):
     data = request.json
@@ -201,7 +197,7 @@ def place_order():
 
     stock, avg_sales, supplier_days = result
 
-    # Check for existing pending order (one at a time)
+    # Check for existing pending order 
     c.execute("SELECT id FROM orders WHERE inventory_id=? AND status='pending'", (inventory_id,))
     if c.fetchone():
         conn.close()
