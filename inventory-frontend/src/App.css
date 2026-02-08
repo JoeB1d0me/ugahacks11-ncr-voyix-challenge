@@ -69,7 +69,7 @@ button:hover {
   gap: 10px;
 }
 
-.form div h3{
+.container div h3{
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -81,8 +81,46 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 4px;
   background: whitesmoke;
+  color: #222;
 }
 
 .form input::placeholder{
   color: #222;
+}
+
+.form button{
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+
+}
+
+.cancel-btn {
+  background: #777;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.order-btn {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.arrival-date {
+  color: #2196F3;
+  font-weight: bold;
+}
+
+.no-order {
+  color: #999;
 }

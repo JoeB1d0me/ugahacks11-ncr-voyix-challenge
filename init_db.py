@@ -6,6 +6,7 @@ c = conn.cursor()
 # Drop tables if they exist (for reset)
 c.execute("DROP TABLE IF EXISTS inventory")
 c.execute("DROP TABLE IF EXISTS sales")
+c.execute("DROP TABLE IF EXISTS orders")
 
 # Inventory table
 c.execute("""
@@ -26,6 +27,19 @@ CREATE TABLE sales (
     item TEXT,
     date TEXT,
     units_sold INTEGER
+)
+""")
+
+# Orders table for tracking restocks
+c.execute("""
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    inventory_id INTEGER NOT NULL,
+    quantity_ordered INTEGER NOT NULL,
+    order_date TEXT NOT NULL,
+    expected_arrival_date TEXT NOT NULL,
+    status TEXT DEFAULT 'pending',
+    FOREIGN KEY (inventory_id) REFERENCES inventory(id) ON DELETE CASCADE
 )
 """)
 
