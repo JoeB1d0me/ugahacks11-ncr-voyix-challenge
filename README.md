@@ -25,8 +25,9 @@ This is my first ever submission for a hackathon and I'm happy to be able to sha
 ## Installation & Running Locally
 ```bash
 pip install flask flask-cors
+python init_db.py
 python app.py
-npm install
+
 
 cd inventory-frontend
 npm install
